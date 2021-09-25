@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MCMNT.Views.CreateView"
+             xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels">
+    <ContentPage.BindingContext>
+        <itemsvm:ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Enter name"/>
+            <Entry Text="{Binding Items.Name, Mode=TwoWay}" FontSize="Large" Placeholder="NAME"/>
+            <Entry Text="{Binding Items.Summ, Mode=TwoWay}" Placeholder="SUMM"/>
+            
+           
+            <Entry Text="{Binding Items.Description, Mode=TwoWay}" Placeholder="DESCRIPTION"/>
+            <DatePicker MinimumDate="01/01/2021"
+                        MaximumDate="12/31/2021"
+                        
+                        Date="{Binding Items.Date, Mode=TwoWay}" 
+                         >
+                    
+                            
+
+            </DatePicker>
+            <Frame Padding="0" Margin="50,0,50,0" CornerRadius="30">
+            <Button Text="ADD"  FontSize="Large" TextColor="White" Command="{Binding CreateCMD}" Background="Black"/>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

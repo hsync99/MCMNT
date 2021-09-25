@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MCMNT.Views.ListPage"
+             xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels">
+    <ContentPage.BindingContext>
+        <itemsvm:ViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowDefinitions="auto" ColumnDefinitions="auto">
+
+            <SearchBar Placeholder="Search"  IsEnabled="True" />
+
+            <CollectionView ItemsSource="{Binding ListOfItems}" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollView>
+                            <Frame Padding="0" CornerRadius="20" BackgroundColor="Black">
+                            <SwipeView>
+                                <SwipeView.RightItems  >
+                                    <SwipeItems Mode="Execute" >
+                                            <SwipeItem BackgroundColor="Red" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
+                                                            CommandParameter="{Binding .}"  IsDestructive="True"/> 
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+
+                                <Frame Padding="20,0,20,0" Margin="20,0,20,0" CornerRadius="20">
+                                <StackLayout>
+                                
+                                    
+                               
+                                <Label Text="{Binding Name}"  FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding Summ}" />
+                                <Label Text="{Binding Date}"/>
+                                    
+                            </StackLayout>
+                                </Frame>
+                            </SwipeView>
+                            </Frame>
+                        </ScrollView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+           
+        
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
