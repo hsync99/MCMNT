@@ -48,6 +48,7 @@ namespace MCMNT.ViewModels
             {
                 
             }
+           
             //await Application.Current.MainPage.Navigation.PopAsync(true);
             //await App.Current.MainPage.Navigation.PushAsync(new ListPage());
         }

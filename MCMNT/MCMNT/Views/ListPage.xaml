@@ -20,23 +20,28 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ScrollView>
-                            <Frame Padding="0" CornerRadius="20" BackgroundColor="Black">
+                            <Frame Padding="0" CornerRadius="0" >
                             <SwipeView>
                                 <SwipeView.RightItems  >
-                                    <SwipeItems Mode="Execute" >
-                                            <SwipeItem BackgroundColor="Red" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
+                                    <SwipeItems Mode="Reveal" >
+                                            
+                                            <SwipeItem BackgroundColor="LightGray" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
                                                             CommandParameter="{Binding .}"  IsDestructive="True"/> 
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
 
-                                <Frame Padding="20,0,20,0" Margin="20,0,20,0" CornerRadius="20">
-                                <StackLayout>
-                                
+                                <Frame Padding="20,5,20,0" Margin="20,8,20,0" CornerRadius="60" Opacity="0.7" BorderColor="Gray">
+                                <StackLayout Orientation="Horizontal">
+                                            <StackLayout Margin="20,0,50,0">
+                                                <Label Text="{Binding Name}"  FontSize="Large" TextColor="Black"/>
+                                                <Frame Padding="3,0,3,0" Margin="10,5,0,5" BorderColor="Black" CornerRadius="60" WidthRequest="100">
+                                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding Summ}" TextColor="Black"/>
+                                                </Frame>
+                                            </StackLayout>
                                     
                                
-                                <Label Text="{Binding Name}"  FontSize="Large" TextColor="Black"/>
-                                <Label Text="{Binding Summ}" />
+                                
                                 <Label Text="{Binding Date}"/>
                                     
                             </StackLayout>
