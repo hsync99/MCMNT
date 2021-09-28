@@ -6,28 +6,39 @@ using System.Threading.Tasks;
 using MCMNT.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 namespace MCMNT.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListPage : ContentPage
     {
-        readonly ViewModel vm;
+        public ViewModel vm;
         public ListPage()
         {
-            vm = (ViewModel)BindingContext;
+            
             InitializeComponent();
+            vm = (ViewModel)BindingContext;
         }
 
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-      {
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await vm.OnAppearing();
+        }
+
+        public void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
             try
             {
-                vm.Search(e.ToString());
+
+               //vm.Search(e.NewTextValue);
+                string srh = e.NewTextValue;
+                vm.Search(e.NewTextValue);
             }
             catch(Exception ex)
             {
-                var exception = ex.ToString();
+                Debug.WriteLine(ex);
             }
             
         }

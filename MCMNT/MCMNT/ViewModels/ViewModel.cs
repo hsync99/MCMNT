@@ -14,12 +14,13 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
-
-
+using System.Diagnostics;
+using System.Threading;
 
 using System.Net.Http;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+
 
 namespace MCMNT.ViewModels
 {
@@ -36,6 +37,7 @@ namespace MCMNT.ViewModels
                     {
                        
                         _realm.Remove(item);
+                        ListOfItems.Remove(item);
 
                     });
                 
@@ -58,7 +60,11 @@ namespace MCMNT.ViewModels
         }
         private Items _items = new Items();
         
-    
+     
+        public async Task OnAppearing()
+        {
+            await Task.CompletedTask;
+        }
         public Items Items
         {
             get => _items;
@@ -77,29 +83,24 @@ namespace MCMNT.ViewModels
             DeleteItemFromListCommand = new AsyncCommand<Items>(DeleteItemFrom);
 
         }
+
+     
+
         public void Search(string srh)
-        {
+       {
             if (string.IsNullOrEmpty(srh))
             {
-
+                ListOfItems = new ObservableRangeCollection<Items>(_realm.All<Items>());
             }
             else
             {
-                try
-                {
-                    var newitems = _realm.All<Items>().Where(c => c.Name.Contains(srh));
-                    Items = newitems.FirstOrDefault();
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-
-
-
+    
+               var newitems = _realm.All<Items>().Where(c => c.Name.Contains(srh));
+               ListOfItems.ReplaceRange(newitems);
             }
+
         }
+        
 
         public Command CreateCMD
         {

@@ -6,15 +6,24 @@
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
+    <Grid  Padding="20" ColumnDefinitions="2" RowDefinitions="1">
+        <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="3">
+            <Frame Padding="0" Grid.Column="1" Grid.Row="1" >
+                <Label Text="HELLO" FontSize="50" HorizontalTextAlignment="Center" TextColor="Black"/>
+            </Frame>
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        <Frame Grid.Column="1" Grid.Row="2" Padding="0"  BackgroundColor="Black" CornerRadius="20" >
+            <Button BackgroundColor="Black" TextColor="White" Padding="0" Text=" ADD " Command="{Binding NavToCreateCommand}"/>
         </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-      
-        <Button Text=" ADD " Command="{Binding NavToCreateCommand}"/>
-        <Button Text="SHOW " Command="{Binding NavToListCommand}"/>
-    </StackLayout>
 
+
+            <Frame Grid.Column="1" Grid.Row="3" Padding="0"  BackgroundColor="Black" CornerRadius="20" >
+            <Button TextColor="White" BackgroundColor="Black" Text="SHOW " Command="{Binding NavToListCommand}"/>
+        </Frame>
+            <Frame Grid.ColumnSpan="2" Grid.Row="8" Padding="0"  BackgroundColor="Black" CornerRadius="20" >
+               
+            </Frame>
+
+        </Grid>
+    </Grid>
 </ContentPage>

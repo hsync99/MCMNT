@@ -2,14 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MCMNT.Views.ListPage"
-             xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels">
+             xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowDefinitions="auto" ColumnDefinitions="auto">
 
-            <SearchBar Placeholder="Search"  IsEnabled="True" />
+            <SearchBar TextChanged="SearchBar_TextChanged">
+                
+            </SearchBar>
+                                                         
 
             <CollectionView ItemsSource="{Binding ListOfItems}" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
                 <CollectionView.ItemTemplate>
