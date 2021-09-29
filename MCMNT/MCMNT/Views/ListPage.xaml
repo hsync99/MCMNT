@@ -3,35 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MCMNT.Views.ListPage"
              xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="LIST PAGE" 
+             
+            
+             
+             >
     
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid RowDefinitions="auto" ColumnDefinitions="auto">
-
-            <SearchBar TextChanged="SearchBar_TextChanged">
+        <Grid RowDefinitions="auto" ColumnDefinitions="auto" BackgroundColor="#2296F3">
+            <Image Opacity="0.7" Grid.ColumnSpan="3" Grid.RowSpan="2"  Source="gradient1.jpg" Aspect="AspectFill"/>
+            <Frame Padding="0" Margin="10,0,10,0" CornerRadius="60">
+            <SearchBar Placeholder="Search" TextChanged="SearchBar_TextChanged">
                 
             </SearchBar>
-                                                         
+            </Frame>
 
-            <CollectionView ItemsSource="{Binding ListOfItems}" Grid.Row="1" Grid.Column="0" SelectionMode="Single">
-                <CollectionView.ItemTemplate>
+            <CollectionView  ItemsSource="{Binding ListOfItems}" Grid.Row="1" Grid.Column="0" >
+                <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <ScrollView>
-                            <Frame Padding="0" CornerRadius="0" >
-                            <SwipeView>
+                        <ScrollView >
+                            <Frame Padding="0" Margin="20,0,20,6" CornerRadius="60" Opacity="0.8" >
+                            <SwipeView FlowDirection="MatchParent">
                                 <SwipeView.RightItems  >
-                                    <SwipeItems Mode="Reveal" >
+                                    <SwipeItems  Mode="Reveal" >
                                             
-                                            <SwipeItem BackgroundColor="LightGray" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
+                                            <SwipeItem  Text="DELETE" BackgroundColor="Red" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
                                                             CommandParameter="{Binding .}"  IsDestructive="True"/> 
                                     </SwipeItems>
                                 </SwipeView.RightItems>
 
 
-                                <Frame Padding="20,5,20,0" Margin="20,8,20,0" CornerRadius="60" Opacity="0.7" BorderColor="Gray">
+                                <Frame Padding="0,5,0,0" Margin="0,0,0,0" CornerRadius="60" Opacity="0.7" BorderColor="Gray">
                                 <StackLayout Orientation="Horizontal">
                                             <StackLayout Margin="20,0,50,0">
                                                 <Label Text="{Binding Name}"  FontSize="Large" TextColor="Black"/>
@@ -40,8 +46,8 @@
                                                 </Frame>
                                             </StackLayout>
                                     
-                               
                                 
+                               
                                 <Label Text="{Binding Date}"/>
                                     
                             </StackLayout>
