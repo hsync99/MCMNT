@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xct:Popup
+     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MCMNT.Views.Page1"
+     xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
+    
+    
+    >
+    <xct:Popup.BindingContext>
+        <itemsvm:ViewModel/>
+    </xct:Popup.BindingContext>
+    <xct:Popup.Content>
+        <Frame CornerRadius="60">
+        <StackLayout >
+            <Label Text="ITS POPUP" FontSize="60"/>
+            
+        </StackLayout>
+        </Frame>
+    </xct:Popup.Content>
+</xct:Popup>

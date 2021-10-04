@@ -20,12 +20,15 @@ using System.Threading;
 using System.Net.Http;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace MCMNT.ViewModels
 {
     public class ViewModel : INotifyPropertyChanged
     {
+
+        private Size pagesize;
+        public Size PageSize { get => pagesize; set => SetProperty(ref pagesize, value); }
         public ICommand DeleteItemFromListCommand { get; }
         
         public async Task DeleteItemFrom(Items item)
@@ -74,12 +77,10 @@ namespace MCMNT.ViewModels
         Realm _realm = Realm.GetInstance();
         public ViewModel()
         {
-            //Items.Id = _items.Id;
-            //Items.Name = _items.Name;
-            //Items.Description = _items.Description;
-            //Items.Summ = _items.Summ;
-            Items.Id = Guid.NewGuid().ToString();
-            //var tempitems = new List<Items>(_realm.All<Order>()).OrderByDescending(x => x.Courier == null).ThenBy(x => x.Status).ThenBy(x => x.Id);
+           
+            
+           
+            Items.Id = Guid.NewGuid().ToString();            
             ListOfItems = new ObservableRangeCollection<Items>(_realm.All<Items>());
             DeleteItemFromListCommand = new AsyncCommand<Items>(DeleteItemFrom);
 
@@ -143,13 +144,16 @@ namespace MCMNT.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await App.Current.MainPage.Navigation.PushAsync(new CreateView());
+                    var popup = new Page1();
+                    popup.Size = PageSize;
+                    await App.Current.MainPage.Navigation.ShowPopupAsync(popup);
+                    //await App.Current.MainPage.Navigation.PushAsync();
                 });
             }
         }
 
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
+        public bool SetProperty<T>(ref T backingStore, T value,
              [CallerMemberName] string propertyName = "",
              Action onChanged = null)
         {

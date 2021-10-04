@@ -12,6 +12,7 @@ namespace MCMNT.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateView : ContentPage
     {
+        
         public CreateView()
         {
             InitializeComponent();
