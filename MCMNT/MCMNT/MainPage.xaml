@@ -2,19 +2,52 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MCMNT.MainPage"
-                xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels">
+                xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
+             >
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        <Frame BackgroundColor="#2296F3">
+            <Label Text="Welcome to my Xamarin Application" FontSize="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="White" />
         </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-      
-        <Button Text=" ADD " Command="{Binding NavToCreateCommand}"/>
-        <Button Text="SHOW " Command="{Binding NavToListCommand}"/>
-    </StackLayout>
+        <Frame Padding="5" Margin="5"  CornerRadius="20" BackgroundColor="#2296F3" Opacity="0.8">
+        <StackLayout Orientation="Vertical" >
+                <Frame Padding="0" CornerRadius="60" Margin="10,0,180,0">
+                    <SwipeView >
+                        <SwipeView.LeftItems >
+                            <SwipeItems Mode="Reveal" >
+                                <SwipeItem  Text="ADD" BackgroundColor="Red" Command="{Binding NavToCreateCommand}">
 
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <Frame Padding="0"  BorderColor="Black" BackgroundColor="Black" HasShadow="True" VerticalOptions="StartAndExpand" Margin="0,0,50,0" HeightRequest="50" WidthRequest="50" CornerRadius="60">
+                            <Label Text="ADD" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </Frame>
+
+                    </SwipeView>
+                </Frame>
+
+                <Frame Padding="0" CornerRadius="60" Margin="180,0,10,0">
+                    <SwipeView BackgroundColor="White" Margin="0" >
+                        <SwipeView.RightItems >
+                            <SwipeItems Mode="Reveal"  >
+                                <SwipeItem Text="Show" BackgroundColor="Red" Command="{Binding NavToListCommand}">
+
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                    <Frame  Padding="0"  BackgroundColor="Black" VerticalOptions="EndAndExpand"  HeightRequest="50" WidthRequest="50" Margin="50,0,0,0" CornerRadius="60">
+                        <Label Text="SHOW" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    </Frame>
+                </SwipeView>
+                </Frame>
+
+
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+    
 </ContentPage>
