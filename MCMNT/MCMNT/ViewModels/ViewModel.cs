@@ -30,7 +30,10 @@ namespace MCMNT.ViewModels
         private Size pagesize;
         public Size PageSize { get => pagesize; set => SetProperty(ref pagesize, value); }
         public ICommand DeleteItemFromListCommand { get; }
-        
+      
+
+      public double Cash { get; set; }
+        public double CashLost { get; set; }
         public async Task DeleteItemFrom(Items item)
         {
 
@@ -62,11 +65,22 @@ namespace MCMNT.ViewModels
             
             set => SetProperty(ref _listofitems, value);
         }
+        private ObservableRangeCollection<MyCash> _listofcash;
+        public ObservableRangeCollection<MyCash> ListOfCash
+        {
+            get => _listofcash;
+
+            set => SetProperty(ref _listofcash, value);
+        }
         private Items _items = new Items();
-        
+        private MyCash _myCash = new MyCash();
      
         public async Task OnAppearing()
         {
+            // Cash = _realm.All<MyCash>().Where(MyCash.Cash = 0); ;
+            var cash = _realm.All<MyCash>();
+            ListOfCash.ReplaceRange(cash);
+           
             await Task.CompletedTask;
         }
         public Items Items
@@ -74,14 +88,22 @@ namespace MCMNT.ViewModels
             get => _items;
             set => SetProperty(ref _items, value);
         }
+        public MyCash MyCash
+        {
+            get => _myCash;
+            set => SetProperty(ref _myCash, value);
+        }
         Realm _realm = Realm.GetInstance();
         public ViewModel()
         {
-           
-            
+
+
            
             Items.Id = Guid.NewGuid().ToString();            
             ListOfItems = new ObservableRangeCollection<Items>(_realm.All<Items>());
+            ListOfCash = new ObservableRangeCollection<MyCash>();
+          
+
             DeleteItemFromListCommand = new AsyncCommand<Items>(DeleteItemFrom);
 
         }
@@ -102,21 +124,44 @@ namespace MCMNT.ViewModels
             }
 
         }
-        
 
-        public Command CreateCMD
+        public Command AddCash
         {
             get
             {
                 return new Command(() => {
                     // for auto increment the id upon adding
-                    
+
+                    _realm.Write(() =>
+                    {
+
+                        
+                        _realm.Add(MyCash);
+
+                        
+                    });
+                 
+
+                });
+            }
+
+        }
+        public Command CreateCMD
+        {
+            
+            get
+            {
+                return new Command(() => {
+                    // for auto increment the id upon adding
+                    var @cash = _realm.All<MyCash>().First(d => d.id == "1");
                     _realm.Write(() =>
                     {
 
 
-                        
                         _realm.Add(Items); // Add the whole set of details
+                        @cash.Cash = @cash.Cash - Items.Summ;
+                        //_realm.Add(MyCash);
+                        
                     });
                     Application.Current.MainPage.Navigation.PopAsync(true);
                     App.Current.MainPage.Navigation.PushAsync(new CreateView());
@@ -144,10 +189,14 @@ namespace MCMNT.ViewModels
             {
                 return new Command(async () =>
                 {
-                    var popup = new Page1();
-                    popup.Size = PageSize;
-                    await App.Current.MainPage.Navigation.ShowPopupAsync(popup);
-                    //await App.Current.MainPage.Navigation.PushAsync();
+                    //var popup = new Page1();
+                    // popup.Size = PageSize;
+                    // await App.Current.MainPage.Navigation.ShowPopupAsync(popup);
+                    // await App.Current.MainPage.Navigation.PushAsync();
+                    //await App.Current.MainPage.Navigation.PushAsync(new CreateView());
+
+                    await Shell.Current.GoToAsync("//CreateView");
+                    //await Shell.Current.GoToAsync($"//{nameof(MainPage)}/{nameof(CreateView)}");
                 });
             }
         }
@@ -165,7 +214,7 @@ namespace MCMNT.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
+        
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
