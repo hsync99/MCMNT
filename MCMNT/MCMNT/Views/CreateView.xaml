@@ -2,33 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MCMNT.Views.CreateView"
+             BackgroundColor="White"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             
+             Shell.NavBarIsVisible="False"
+             
+             
              xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels">
+              
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ADD" Command="{Binding CreateCMD}">
-            
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout Padding="1,1,1,1">
-            <Label Text="Enter name"/>
+        <StackLayout Padding="1,25,1,1" BackgroundColor="{StaticResource Primary}">
+            <Label Margin="25,0,0,0" FontSize="17" Text="Название" TextColor="White" />
             <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
-                
-                <Entry Text="{Binding Items.Name, Mode=TwoWay}" FontSize="Large" Placeholder="NAME" Margin="10,0,0,0"/>
+
+                <Entry Text="{Binding Items.Name, Mode=TwoWay}" FontSize="Large" Placeholder="Название" Margin="10,0,0,0"/>
             </Frame>
+            <Label Margin="25,0,0,0" FontSize="17" Text="Цена" TextColor="White" />
             <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
 
 
-                <Entry Margin="10,0,0,0" Text="{Binding Items.Summ, Mode=TwoWay}" Placeholder="SUMM"/>
+                <Entry Margin="10,0,0,0" Text="{Binding Items.Summ, Mode=TwoWay}" Placeholder="Цена"/>
             </Frame>
+            <Label Margin="25,0,0,0" FontSize="17" Text="Описание" TextColor="White" />
+            <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
+                <Entry Margin="10,0,0,0" Text="{Binding Items.Description, Mode=TwoWay}" Placeholder="Описание"/>
+            </Frame>
+            <Label Margin="25,0,0,0" FontSize="17" Text="Дата" TextColor="White" />
+            <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
 
-            <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
-                <Entry Margin="10,0,0,0" Text="{Binding Items.Description, Mode=TwoWay}" Placeholder="DESCRIPTION"/>
-            </Frame>
-            <Frame Padding="0" Opacity="0.7" CornerRadius="60" Margin="20,0,20,0" HasShadow="True">
             <DatePicker MinimumDate="01/01/2021"
                         MaximumDate="12/31/2021"
                         Margin="10,0,0,0"
@@ -39,8 +44,8 @@
 
             </DatePicker>
             </Frame>
-            <Frame Padding="0" Margin="50,0,50,0" CornerRadius="30">
-            <!--<Button Text="ADD"  FontSize="Large" TextColor="White" Command="{Binding CreateCMD}" Background="Black"/>-->
+            <Frame Padding="0" Margin="50,0,50,0" CornerRadius="1">
+                <Button Text="BUY" CornerRadius="1" FontSize="Large" TextColor="White" Command="{Binding CreateCMD}" Background="#95251B"/>
             </Frame>
         </StackLayout>
     </ContentPage.Content>

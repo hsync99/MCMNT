@@ -10,7 +10,8 @@ namespace MCMNT
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new AppShell();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTIzNTI0QDMxMzkyZTMzMmUzMFFUWGhxN3VpbFpEcTJJU09NcENZaFV0bGtzWWZJYzQxQVpiOUkraENKTjg9");
         }
 
         protected override void OnStart()

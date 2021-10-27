@@ -2,52 +2,79 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MCMNT.MainPage"
+             x:DataType="itemsvm:ViewModel"
+               xmlns:models="clr-namespace:MCMNT.Models"
+                Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="Animated"
+            
                 xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
              >
     <ContentPage.BindingContext>
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
 
-    <StackLayout>
-        <Frame BackgroundColor="#2296F3">
-            <Label Text="Welcome to my Xamarin Application" FontSize="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="White" />
-        </Frame>
-        <Frame Padding="5" Margin="5"  CornerRadius="20" BackgroundColor="#2296F3" Opacity="0.8">
-        <StackLayout Orientation="Vertical" >
-                <Frame Padding="0" CornerRadius="60" Margin="10,0,180,0">
-                    <SwipeView >
-                        <SwipeView.LeftItems >
-                            <SwipeItems Mode="Reveal" >
-                                <SwipeItem  Text="ADD" BackgroundColor="Red" Command="{Binding NavToCreateCommand}">
+        <DataTemplate x:Key="cashTemplate" x:DataType="models:MyCash">
+            <StackLayout Spacing="0">
+                <Label  Margin="2,0,0,0" Text="Cумма" TextColor="White" FontAttributes="Italic" FontSize="17" HorizontalTextAlignment="Start" />
+                <Label CharacterSpacing="0" Text="{Binding Cash}" TextColor="White" FontSize="34" HorizontalTextAlignment="Start" />
+                <Label  Margin="2,0,0,0" Text="Потрачено" TextColor="White"  FontAttributes="Italic" FontSize="17" HorizontalTextAlignment="Start" />
+                <Label Text="{Binding CashLost}" TextColor="White" FontSize="29" HorizontalTextAlignment="Start" />
+            </StackLayout>
+            
 
-                                </SwipeItem>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-                        <Frame Padding="0"  BorderColor="Black" BackgroundColor="Black" HasShadow="True" VerticalOptions="StartAndExpand" Margin="0,0,50,0" HeightRequest="50" WidthRequest="50" CornerRadius="60">
-                            <Label Text="ADD" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                        </Frame>
 
-                    </SwipeView>
-                </Frame>
 
-                <Frame Padding="0" CornerRadius="60" Margin="180,0,10,0">
-                    <SwipeView BackgroundColor="White" Margin="0" >
-                        <SwipeView.RightItems >
-                            <SwipeItems Mode="Reveal"  >
-                                <SwipeItem Text="Show" BackgroundColor="Red" Command="{Binding NavToListCommand}">
+        </DataTemplate>
+    </ContentPage.Resources>    
+    
+    <ContentPage.Content>
 
-                                </SwipeItem>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-                    <Frame  Padding="0"  BackgroundColor="Black" VerticalOptions="EndAndExpand"  HeightRequest="50" WidthRequest="50" Margin="50,0,0,0" CornerRadius="60">
-                        <Label Text="SHOW" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                    </Frame>
-                </SwipeView>
-                </Frame>
+
+        <Grid RowDefinitions="3" BackgroundColor="{StaticResource Primary}">
+        <StackLayout Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="{StaticResource Primary}" Padding="0"  >
+                <ScrollView>
+                    
+                
+            <StackLayout Padding="0">
+                <CollectionView Margin="10" ItemsSource="{Binding ListOfCash }" ItemTemplate="{StaticResource cashTemplate }">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </StackLayout >
+                </ScrollView>
 
 
             </StackLayout>
-        </Frame>
-    </StackLayout>
+            <Grid RowDefinitions="1" Grid.Row="2" Grid.Column="1">
+                <Frame BackgroundColor="{StaticResource BG}" Margin="0,0" Grid.Row="3" >
+                    <Entry Text="{Binding MyCash.Cash}"  TextColor="White"  >
+
+                    </Entry>
+                </Frame>
+            </Grid>
+            <Grid RowDefinitions="1" Grid.Row="2" Grid.Column="0" >
+                <Button TextColor="White" CornerRadius="10"   Text="Add Cash" BackgroundColor="#577430" Grid.Row="3" Command="{Binding AddCash}" >
+
+                </Button>
+            </Grid>
+            
+
+          
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
+                
+                <Frame  Padding="100,10,100,0" Margin="0,0,0,0"  CornerRadius="20" BackgroundColor="{StaticResource BG}" Opacity="0.8">
+                    <StackLayout Orientation="Vertical" >
+                        <Button Text="BUY" BackgroundColor="#95251B" Command="{Binding NavToCreateCommand}"/>
+                        <Button Text="Show" BackgroundColor="#577430" Command="{Binding NavToListCommand}"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+ 
+
     
 </ContentPage>

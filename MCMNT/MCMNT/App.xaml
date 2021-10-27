@@ -1,8 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MCMNT.App">
+             x:Class="MCMNT.App"
+          
+             >
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Color x:Key="Primary">#1E1E1E</Color>
+            <Color x:Key="Accent">#0D7E86</Color>
+            <Color x:Key="BG">#3E3E42</Color>
+            <Color x:Key="LightGreen">#577430</Color>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#33696b74" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="#3C3C3E"></Setter>
+                <Setter Property="PlaceholderColor" Value="#676767"></Setter>
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="TextColor" Value="#3C3C3E"></Setter>
+                <Setter Property="PlaceholderColor" Value="#676767"></Setter>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="BackgroundColor" Value="#F6F7FB"></Setter>
+                <Setter Property="Padding" Value="5"></Setter>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#3C3C3E"></Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

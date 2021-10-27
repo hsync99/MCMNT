@@ -5,7 +5,7 @@
              xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              Title="LIST PAGE" 
-             
+             Shell.BackgroundColor="{StaticResource Primary}"
             
              
              >
@@ -14,8 +14,8 @@
         <itemsvm:ViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid RowDefinitions="auto" ColumnDefinitions="auto" BackgroundColor="#2296F3">
-            <Image Opacity="0.7" Grid.ColumnSpan="3" Grid.RowSpan="2"  Source="gradient1.jpg" Aspect="AspectFill"/>
+        <Grid RowDefinitions="auto" ColumnDefinitions="auto" BackgroundColor="{StaticResource Primary}">
+            <Image Opacity="0.7" Grid.ColumnSpan="3" Grid.RowSpan="2"  Aspect="AspectFill"/>
             <Frame Padding="0" Margin="10,0,10,0" CornerRadius="60">
             <SearchBar Placeholder="Search" TextChanged="SearchBar_TextChanged">
                 
@@ -26,12 +26,12 @@
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <ScrollView >
-                            <Frame Padding="0" Margin="20,0,20,6" CornerRadius="60" Opacity="0.8" >
+                            <Frame Padding="0" Margin="20,0,20,6" CornerRadius="60" Opacity="0.8"  >
                             <SwipeView FlowDirection="MatchParent">
                                 <SwipeView.RightItems  >
                                     <SwipeItems  Mode="Reveal" >
-                                            
-                                            <SwipeItem  Text="DELETE" BackgroundColor="Red" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
+
+                                            <SwipeItem  Text="DELETE" BackgroundColor="#95251B" Command="{Binding Source={RelativeSource AncestorType={x:Type itemsvm:ViewModel}}, Path=DeleteItemFromListCommand}"		
                                                             CommandParameter="{Binding .}"  IsDestructive="True"/> 
                                     </SwipeItems>
                                 </SwipeView.RightItems>
