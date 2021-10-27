@@ -131,7 +131,7 @@ namespace MCMNT.ViewModels
             {
                 return new Command(() => {
                     // for auto increment the id upon adding
-
+                  
                     _realm.Write(() =>
                     {
 
@@ -160,11 +160,12 @@ namespace MCMNT.ViewModels
 
                         _realm.Add(Items); // Add the whole set of details
                         @cash.Cash = @cash.Cash - Items.Summ;
+                        @cash.CashLost = @cash.CashLost + Items.Summ;
                         //_realm.Add(MyCash);
                         
                     });
                     Application.Current.MainPage.Navigation.PopAsync(true);
-                    App.Current.MainPage.Navigation.PushAsync(new CreateView());
+                   App.Current.MainPage.Navigation.PushAsync(new MainPage());
 
                 });
             }
