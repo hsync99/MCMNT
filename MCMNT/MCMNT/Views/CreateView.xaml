@@ -47,6 +47,11 @@
             <Frame Padding="0" Margin="50,0,50,0" CornerRadius="1">
                 <Button Text="BUY" CornerRadius="1" FontSize="Large" TextColor="White" Command="{Binding CreateCMD}" Background="#95251B"/>
             </Frame>
+            <Grid RowDefinitions="auto,*,auto">
+            <ActivityIndicator Grid.Row="1" Grid.Column="0" Color="White" IsRunning="True" >
+
+            </ActivityIndicator>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
