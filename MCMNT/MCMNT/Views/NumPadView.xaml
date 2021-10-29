@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:itemsvm ="clr-namespace:MCMNT.ViewModels"
+             Shell.BackgroundColor="{x:StaticResource Primary}"
+             x:Class="MCMNT.Views.NumPadView">
+    <ContentPage.BindingContext>
+        <itemsvm:ViewModel/>
+    </ContentPage.BindingContext>         
+    
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource Primary}">
+            <Entry x:Name="xEntry" HorizontalTextAlignment="End" TextColor="White" FontSize="35" IsReadOnly="True" Text="{Binding MyCash.Cash}" />
+            <Grid RowDefinitions="4" ColumnDefinitions="3">
+                <!--первый ряд-->
+                <Button x:Name="x1" CornerRadius="0" FontSize="24" Text="1" Grid.Row="1" Grid.Column="1"  Clicked="x1_Clicked"  />
+                <Button x:Name="x2" CornerRadius="0" FontSize="24" Text="2" Grid.Row="1" Grid.Column="2" Clicked="x2_Clicked" />
+                <Button x:Name="x3"  CornerRadius="0" FontSize="24" Text="3" Grid.Row="1" Grid.Column="3" Clicked="x3_Clicked" />
+                <!--второй ряд-->
+                <Button x:Name="x4" CornerRadius="0"  FontSize="24"  Text="4" Grid.Row="2" Grid.Column="1" Clicked="x4_Clicked" />
+                <Button x:Name="x5" CornerRadius="0"  FontSize="24" Text="5" Grid.Row="2" Grid.Column="2" Clicked="x5_Clicked"/>
+                <Button x:Name="x6"  FontSize="24" Text="6" Grid.Row="2" Grid.Column="3" Clicked="x6_Clicked" />
+                <!--третий ряд-->
+                <Button x:Name="x7"  CornerRadius="0" FontSize="24" Text="7" Grid.Row="3" Grid.Column="1" Clicked="x7_Clicked"  />
+                <Button x:Name="x8"   CornerRadius="0"  FontSize="24"  Text="8" Grid.Row="3" Grid.Column="2"  Clicked="x8_Clicked"/>
+                <Button x:Name="x9"   CornerRadius="0"  FontSize="24" Text="9" Grid.Row="3" Grid.Column="3" Clicked="x9_Clicked" />
+                <!--четвертый ряд-->
+                <Button x:Name="xBack"  CornerRadius="0"  Text="←" FontSize="40" Grid.Row="4" Grid.Column="1" Clicked="xBack_Clicked" />
+                <Button x:Name="x0"  CornerRadius="0"  FontSize="24"  Text="0" Grid.Row="4" Grid.Column="2" Clicked="x0_Clicked"/>
+                <Button x:Name="xClear"  CornerRadius="0" FontSize="24"  Text="X" Grid.Row="4" Grid.Column="3" Clicked="xClear_Clicked"/>
+                
+
+            </Grid>
+            <Button FontSize="24"   Text="Подтвердить" CornerRadius="0" Command="{Binding AddCash}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

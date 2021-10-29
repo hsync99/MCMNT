@@ -36,12 +36,21 @@ namespace MCMNT.ViewModels
         public double CashLost { get; set; }
         public async Task DeleteItemFrom(Items item)
         {
-
+            var summ = _realm.All<Items>().First(x => x.Summ == item.Summ);
+            var @cash = _realm.All<MyCash>().First(d => d.id == "1");
+            MyCash mycash = new MyCash();
+            mycash.Cash = @cash.Cash;
+            mycash.CashLost = @cash.CashLost;
             try
             {
                     _realm.Write(() =>
                     {
-                       
+                        mycash.Cash = mycash.Cash + item.Summ;
+                        mycash.CashLost = mycash.CashLost - item.Summ;
+                        @cash = mycash;
+                        _realm.RemoveAll<MyCash>();
+                        _realm.Add(mycash);
+
                         _realm.Remove(item);
                         ListOfItems.Remove(item);
 
@@ -129,23 +138,37 @@ namespace MCMNT.ViewModels
 
         }
 
+
+        public Command GoToAddCash
+        {
+            get
+            {
+                return new Command(() => {
+                    // for auto increment the id upon adding
+
+                    App.Current.MainPage.Navigation.PushAsync(new NumPadView());
+                });
+            }
+
+        }
+
         public Command AddCash
         {
             get
             {
                 return new Command(() => {
                     // for auto increment the id upon adding
-                  
 
+                   
                     _realm.Write(() =>
                     {
 
-                        
+                        _realm.RemoveAll<MyCash>();
                         _realm.Add(MyCash);
-                 
-                        
+
+
                     });
-                 
+                    App.Current.MainPage.Navigation.PushAsync(new MainPage());
 
                 });
             }
@@ -206,9 +229,9 @@ namespace MCMNT.ViewModels
             {
                 return new Command(async () =>
                 {
-                    
 
-                    await Shell.Current.GoToAsync("//CreateView");
+                    await App.Current.MainPage.Navigation.PushAsync(new CreateView());
+                    //await Shell.Current.GoToAsync("//CreateView");
                 });
             }
         }

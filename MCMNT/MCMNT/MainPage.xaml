@@ -34,7 +34,7 @@
 
         <Grid RowDefinitions="3" BackgroundColor="{StaticResource Primary}">
         <StackLayout Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="{StaticResource Primary}" Padding="0"  >
-                <ScrollView>
+                
                     
                 
             <StackLayout Padding="0">
@@ -44,31 +44,39 @@
                     </CollectionView.ItemsLayout>
                 </CollectionView>
             </StackLayout >
-                </ScrollView>
+                
 
 
             </StackLayout>
-            <Grid RowDefinitions="1" Grid.Row="2" Grid.Column="1">
-                <Frame BackgroundColor="{StaticResource BG}" Margin="0,0" Grid.Row="3" >
-                    <Entry Text="{Binding MyCash.Cash}"  TextColor="White"  >
-
-                    </Entry>
-                </Frame>
-            </Grid>
-            <Grid RowDefinitions="1" Grid.Row="2" Grid.Column="0" >
-                <Button TextColor="White" CornerRadius="10"   Text="Add Cash" BackgroundColor="#577430" Grid.Row="3" Command="{Binding AddCash}" >
-
-                </Button>
-            </Grid>
+            
+          
             
 
           
-            <StackLayout Grid.Row="3" Grid.ColumnSpan="2">
+            <StackLayout Grid.Row="2" Grid.ColumnSpan="3" >
                 
-                <Frame  Padding="100,10,100,0" Margin="0,0,0,0"  CornerRadius="20" BackgroundColor="{StaticResource BG}" Opacity="0.8">
+                <Frame  Padding="10,10,1,1" Margin="0,0,0,0"  CornerRadius="20" BackgroundColor="{StaticResource Primary}" Opacity="0.8"  >
                     <StackLayout Orientation="Vertical" >
-                        <Button Text="BUY" BackgroundColor="#95251B" Command="{Binding NavToCreateCommand}"/>
-                        <Button Text="Show" BackgroundColor="#577430" Command="{Binding NavToListCommand}"/>
+
+                        <Frame BackgroundColor="{StaticResource BG}" CornerRadius="60" Margin="50,85,55,0" WidthRequest="100" HeightRequest="100" >
+                            <Button WidthRequest="100"  HeightRequest="100" TextColor="White" CornerRadius="60"  Text="Пополнить" BackgroundColor="{StaticResource BG}" Grid.Row="3" Command="{Binding GoToAddCash}" />
+                        </Frame>
+
+
+
+                        <Frame  BackgroundColor="{StaticResource BG}"  CornerRadius="60"  Margin="50,0,55,0"  WidthRequest="100" HeightRequest="100">
+                            <Button WidthRequest="100"  HeightRequest="100" TextColor="White" CornerRadius="60"  Text="КУПИТЬ" BackgroundColor="{StaticResource BG}" Grid.Row="3" Command="{Binding NavToCreateCommand}" />
+                        </Frame>
+
+
+                        <Frame BackgroundColor="{StaticResource BG}"  CornerRadius="60" Margin="50,0,55,50" WidthRequest="100" HeightRequest="100">
+                            <Button WidthRequest="100"  HeightRequest="100" TextColor="White"  Text="ПОКАЗАТЬ" CornerRadius="60" BackgroundColor="{StaticResource BG}"   Command="{Binding NavToListCommand}" BorderWidth="1"/>
+                        </Frame>
+                            
+                       
+                        
+                        
+                        
                     </StackLayout>
                 </Frame>
             </StackLayout>

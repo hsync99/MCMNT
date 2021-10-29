@@ -94,7 +94,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BUYICON.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MCMNT\MCMNT.csproj">
       <Project>{F02E6448-763D-4A5F-8474-D0AD0B94D69D}</Project>
