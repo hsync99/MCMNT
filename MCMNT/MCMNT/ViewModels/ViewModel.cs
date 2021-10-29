@@ -36,12 +36,21 @@ namespace MCMNT.ViewModels
         public double CashLost { get; set; }
         public async Task DeleteItemFrom(Items item)
         {
-
+            var summ = _realm.All<Items>().First(x => x.Summ == item.Summ);
+            var @cash = _realm.All<MyCash>().First(d => d.id == "1");
+            MyCash mycash = new MyCash();
+            mycash.Cash = @cash.Cash;
+            mycash.CashLost = @cash.CashLost;
             try
             {
                     _realm.Write(() =>
                     {
-                       
+                        mycash.Cash = mycash.Cash + item.Summ;
+                        mycash.CashLost = mycash.CashLost - item.Summ;
+                        @cash = mycash;
+                        _realm.RemoveAll<MyCash>();
+                        _realm.Add(mycash);
+
                         _realm.Remove(item);
                         ListOfItems.Remove(item);
 
@@ -78,8 +87,12 @@ namespace MCMNT.ViewModels
         public async Task OnAppearing()
         {
             // Cash = _realm.All<MyCash>().Where(MyCash.Cash = 0); ;
-            var cash = _realm.All<MyCash>();
-            ListOfCash.ReplaceRange(cash);
+            _realm.Write(() =>
+            {
+                var cash = _realm.All<MyCash>();
+                ListOfCash.ReplaceRange(cash);
+            });
+            
            
             await Task.CompletedTask;
         }
@@ -125,22 +138,37 @@ namespace MCMNT.ViewModels
 
         }
 
+
+        public Command GoToAddCash
+        {
+            get
+            {
+                return new Command(() => {
+                    // for auto increment the id upon adding
+
+                    App.Current.MainPage.Navigation.PushAsync(new NumPadView());
+                });
+            }
+
+        }
+
         public Command AddCash
         {
             get
             {
                 return new Command(() => {
                     // for auto increment the id upon adding
-                  
+
+                   
                     _realm.Write(() =>
                     {
 
-                        
+                        _realm.RemoveAll<MyCash>();
                         _realm.Add(MyCash);
 
-                        
+
                     });
-                 
+                    App.Current.MainPage.Navigation.PushAsync(new MainPage());
 
                 });
             }
@@ -152,19 +180,30 @@ namespace MCMNT.ViewModels
             get
             {
                 return new Command(() => {
-                    // for auto increment the id upon adding
-                    var @cash = _realm.All<MyCash>().First(d => d.id == "1");
-                    _realm.Write(() =>
+                    try
+                    {
+                        var @cash = _realm.All<MyCash>().First(d => d.id == "1");
+                        MyCash mycash = new MyCash();
+                        mycash.Cash = @cash.Cash;
+                        mycash.CashLost = @cash.CashLost;
+
+                        _realm.Write(() =>
+                        {
+                            _realm.Add(Items); // Add the whole set of details
+                            mycash.Cash = mycash.Cash - Items.Summ;
+                            mycash.CashLost = mycash.CashLost + Items.Summ;
+                            @cash = mycash;
+                            _realm.RemoveAll<MyCash>();
+                            _realm.Add(mycash);
+                        });
+                    }
+                    catch (Exception ex)
                     {
 
-
-                        _realm.Add(Items); // Add the whole set of details
-                        @cash.Cash = @cash.Cash - Items.Summ;
-                        @cash.CashLost = @cash.CashLost + Items.Summ;
-                        //_realm.Add(MyCash);
-                        
-                    });
-                    Application.Current.MainPage.Navigation.PopAsync(true);
+                    }
+                    // for auto increment the id upon adding
+                   
+                    //Application.Current.MainPage.Navigation.PopAsync(true);
                    App.Current.MainPage.Navigation.PushAsync(new MainPage());
 
                 });
@@ -190,14 +229,9 @@ namespace MCMNT.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //var popup = new Page1();
-                    // popup.Size = PageSize;
-                    // await App.Current.MainPage.Navigation.ShowPopupAsync(popup);
-                    // await App.Current.MainPage.Navigation.PushAsync();
-                    //await App.Current.MainPage.Navigation.PushAsync(new CreateView());
 
-                    await Shell.Current.GoToAsync("//CreateView");
-                    //await Shell.Current.GoToAsync($"//{nameof(MainPage)}/{nameof(CreateView)}");
+                    await App.Current.MainPage.Navigation.PushAsync(new CreateView());
+                    //await Shell.Current.GoToAsync("//CreateView");
                 });
             }
         }
